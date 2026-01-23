@@ -668,7 +668,7 @@ def render_sidebar():
             
             **🌍 联系方式**
             - ✉️ 个人邮箱：ykai.w@outlook.com
-            - 💻 GitHub：github.com/ykai-w
+            - 💻 GitHub：github.com/ykkai-w
             
             ---
             
