@@ -28,8 +28,8 @@ SUBSCRIPTION_FILE = os.path.join(os.path.dirname(__file__), 'subscribers.json')
 EMAIL_CONFIG = {
     'smtp_server': 'smtp.qq.com',  # QQ邮箱SMTP
     'smtp_port': 587,
-    'sender_email': '2103318492@qq.com',  # 您的QQ邮箱
-    'sender_password': os.environ.get('EMAIL_PASSWORD', ''),  # QQ邮箱授权码
+    'sender_email': '2103318492@qq.com',  
+    'sender_password': 'avcminvzfhmtfafi',
 }
 
 
