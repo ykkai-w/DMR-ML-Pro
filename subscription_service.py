@@ -414,178 +414,37 @@ class EmailSender:
         
         return html
     
-    def _build_welcome_email_html(self, push_time: str = "08:00") -> str:
+        def _build_welcome_email_html(self, push_time: str = "08:00") -> str:
         """构建订阅确认邮件HTML"""
-        html = f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="utf-8">
-            <style>
-                body {
-                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                    background-color: #f5f5f5;
-                    padding: 20px;
-                }
-                .container {
-                    max-width: 600px;
-                    margin: 0 auto;
-                    background: white;
-                    border-radius: 16px;
-                    overflow: hidden;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-                }
-                .header {
-                    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
-                    color: white;
-                    padding: 40px 30px;
-                    text-align: center;
-                }
-                .header h1 {
-                    margin: 0;
-                    font-size: 32px;
-                }
-                .header p {
-                    margin: 10px 0 0;
-                    opacity: 0.9;
-                    font-size: 16px;
-                }
-                .welcome-box {
-                    padding: 40px 30px;
-                    text-align: center;
-                    background: #f8f9fa;
-                }
-                .welcome-box h2 {
-                    color: #2c3e50;
-                    margin: 0 0 20px;
-                    font-size: 24px;
-                }
-                .welcome-box p {
-                    color: #666;
-                    line-height: 1.8;
-                    margin: 10px 0;
-                }
-                .success-icon {
-                    font-size: 64px;
-                    margin-bottom: 20px;
-                }
-                .feature-section {
-                    padding: 30px;
-                }
-                .feature-item {
-                    padding: 15px 0;
-                    border-bottom: 1px solid #eee;
-                }
-                .feature-item:last-child {
-                    border-bottom: none;
-                }
-                .feature-title {
-                    font-weight: 600;
-                    color: #2c3e50;
-                    margin-bottom: 5px;
-                }
-                .feature-desc {
-                    color: #666;
-                    font-size: 14px;
-                }
-                .info-box {
-                    background: #fff3cd;
-                    border-left: 4px solid #ffc107;
-                    padding: 15px 20px;
-                    margin: 20px 30px;
-                    border-radius: 4px;
-                }
-                .info-box strong {
-                    color: #856404;
-                }
-                .cta-section {
-                    padding: 30px;
-                    text-align: center;
-                    background: #f8f9fa;
-                }
-                .cta-button {
-                    display: inline-block;
-                    padding: 12px 30px;
-                    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
-                    color: white;
-                    text-decoration: none;
-                    border-radius: 25px;
-                    font-weight: 600;
-                    margin: 10px;
-                }
-                .footer {
-                    background: #2c3e50;
-                    color: #95a5a6;
-                    padding: 20px 30px;
-                    text-align: center;
-                    font-size: 12px;
-                }
-                .footer a {
-                    color: #FF6B6B;
-                    text-decoration: none;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>🎉 欢迎加入 DMR-ML Pro</h1>
-                    <p>基于机器学习的双重动量轮动策略</p>
+        html = """<!DOCTYPE html><html><head><meta charset="utf-8"></head>
+        <body style="font-family: Arial; background: #f5f5f5; padding: 20px;">
+            <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <div style="background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); color: white; padding: 40px 30px; text-align: center; border-radius: 16px 16px 0 0;">
+                    <h1>🎉 欢迎加入 DMR-ML Pro</h1><p>基于机器学习的双重动量轮动策略</p>
                 </div>
-                
-                <div class="welcome-box">
-                    <div class="success-icon">✅</div>
-                    <h2>订阅成功！</h2>
-                    <p>恭喜您成为 DMR-ML Pro 的内测用户</p>
-                    <p>每个交易日早上 <strong>{push_time}</strong>，您将收到今日操作信号</p>
+                <div style="padding: 40px 30px; text-align: center; background: #f8f9fa;">
+                    <div style="font-size: 64px;">✅</div><h2 style="color: #2c3e50;">订阅成功！</h2>
+                    <p style="color: #666;">恭喜您成为 DMR-ML Pro 的内测用户</p>
+                    <p style="color: #666;">每个交易日早上 <strong>""" + push_time + """</strong>，您将收到今日操作信号</p>
                 </div>
-                
-                <div class="feature-section">
-                    <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">📊 您将获得</h3>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">📡 每日操作信号</div>
-                        <div class="feature-desc">沪深300/中证1000/空仓，清晰明确的投资建议</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">🛡️ ML风险预警</div>
-                        <div class="feature-desc">机器学习模型实时监控市场风险，提前规避下跌</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">💡 信号解读</div>
-                        <div class="feature-desc">详细的信号原因说明，让您知其然更知其所以然</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">📈 历史验证</div>
-                        <div class="feature-desc">2019年1月-2026年1月累计收益207.9%，复利年化17.3%，最大回撤仅-12.7%</div>
-                    </div>
+                <div style="padding: 30px;"><h3 style="text-align: center; color: #2c3e50;">📊 您将获得</h3>
+                    <div style="padding: 15px 0; border-bottom: 1px solid #eee;"><div style="font-weight: 600; color: #2c3e50;">📡 每日操作信号</div><div style="color: #666; font-size: 14px;">沪深300/中证1000/空仓，清晰明确的投资建议</div></div>
+                    <div style="padding: 15px 0; border-bottom: 1px solid #eee;"><div style="font-weight: 600; color: #2c3e50;">🛡️ ML风险预警</div><div style="color: #666; font-size: 14px;">机器学习模型实时监控市场风险</div></div>
+                    <div style="padding: 15px 0; border-bottom: 1px solid #eee;"><div style="font-weight: 600; color: #2c3e50;">💡 信号解读</div><div style="color: #666; font-size: 14px;">详细的信号原因说明</div></div>
+                    <div style="padding: 15px 0;"><div style="font-weight: 600; color: #2c3e50;">📈 历史验证</div><div style="color: #666; font-size: 14px;">2019年1月-2026年1月累计收益207.9%，复利年化17.3%，最大回撤-12.7%</div></div>
                 </div>
-                
-                <div class="info-box">
-                    <strong>⚠️ 重要提示</strong><br>
-                    本策略基于历史数据回测，过往业绩不代表未来表现。<br>
-                    投资有风险，决策需谨慎。所有信号仅供参考。
+                <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px 20px; margin: 20px 30px; border-radius: 4px;">
+                    <strong style="color: #856404;">⚠️ 重要提示</strong><br><span style="color: #856404;">本策略基于历史数据回测，过往业绩不代表未来表现。投资有风险，决策需谨慎。</span>
                 </div>
-                
-                <div class="cta-section">
-                    <p style="color: #666; margin-bottom: 20px;">访问系统了解更多详情</p>
-                    <a href="https://dmr-ml-pro-8odufgfuzjtivdppmnwrvh.streamlit.app/" class="cta-button">
-                        立即访问系统
-                    </a>
+                <div style="padding: 30px; text-align: center; background: #f8f9fa;">
+                    <p style="color: #666;">访问系统了解更多详情</p>
+                    <a href="https://dmr-ml-pro-8odufgfuzjtivdppmnwrvh.streamlit.app/" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); color: white; text-decoration: none; border-radius: 25px; font-weight: 600;">立即访问系统</a>
                 </div>
-                
-                <div class="footer">
-                    <p>如有任何问题，请回复本邮件或联系 ykai.w@outlook.com</p>
-                    <p>如需取消订阅，请回复邮件告知</p>
-                    <p style="margin-top: 15px;">DMR-ML Pro v1.0-内测版 | © 2026 ykai-w</p>
+                <div style="background: #2c3e50; color: #95a5a6; padding: 20px 30px; text-align: center; font-size: 12px; border-radius: 0 0 16px 16px;">
+                    <p>如有任何问题，请回复本邮件或联系 ykai.w@outlook.com</p><p>如需取消订阅，请回复邮件告知</p><p>DMR-ML Pro v1.0-内测版 | © 2026 ykai-w</p>
                 </div>
             </div>
-        </body>
-        </html>
-        """
+        </body></html>"""
         return html
     
     def send_batch_emails(self, subscribers: List[Subscriber], signal_data: dict) -> dict:
