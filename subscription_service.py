@@ -196,16 +196,17 @@ class EmailSender:
         except Exception as e:
             return False, f"邮件发送失败: {str(e)}"
         
-    def send_welcome_email(self, to_email: str) -> tuple[bool, str]:
+    def send_welcome_email(self, to_email: str, push_time: str = "08:00") -> tuple[bool, str]:
         """
         发送订阅确认邮件
         
         Args:
             to_email: 收件人邮箱
+            push_time: 推送时间
         """
         try:
             subject = "【DMR-ML Pro】订阅成功！感谢支持，欢迎加入🛫"
-            html_content = self._build_welcome_email_html()
+            html_content = self._build_welcome_email_html(push_time)
             
             # 创建邮件
             msg = MIMEMultipart('alternative')
@@ -508,7 +509,7 @@ class EmailSender:
                     <div class="success-icon">✅</div>
                     <h2>订阅成功！</h2>
                     <p>恭喜您成为 DMR-ML Pro 的内测用户</p>
-                    <p>每个交易日早上 <strong>8:00</strong>，您将收到今日操作信号</p>
+                    <p>每个交易日早上 <strong>{push_time}</strong>，您将收到今日操作信号</p>
                 </div>
                 
                 <div class="feature-section">
@@ -527,6 +528,11 @@ class EmailSender:
                     <div class="feature-item">
                         <div class="feature-title">💡 信号解读</div>
                         <div class="feature-desc">详细的信号原因说明，让您知其然更知其所以然</div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-title">📈 历史验证</div>
+                        <div class="feature-desc">2019年1月-2026年1月累计收益207.9%，复利年化17.3%，最大回撤仅-12.7%</div>
                     </div>
                     
                 </div>
