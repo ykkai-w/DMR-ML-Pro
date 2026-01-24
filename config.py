@@ -22,7 +22,7 @@ except ImportError:
 @dataclass
 class TushareConfig:
     """Tushare API 配置"""
-    token: str = "6553c233200ad5402d738d4a016ac71c510aa6e4557cd04bc50ad37d"
+    token: str = ""
     
     def __post_init__(self):
         # 优先级：Streamlit Secrets > 环境变量 > 默认值
@@ -218,3 +218,4 @@ def reset_config() -> SystemConfig:
 
 # 便捷访问
 CONFIG = get_config()
+
