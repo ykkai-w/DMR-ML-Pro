@@ -413,8 +413,7 @@ class EmailSender:
         """
         
         return html
-    
-        def _build_welcome_email_html(self, push_time: str = "08:00") -> str:
+    def _build_welcome_email_html(self, push_time: str = "08:00") -> str:
         """构建订阅确认邮件HTML"""
         html = """<!DOCTYPE html><html><head><meta charset="utf-8"></head>
         <body style="font-family: Arial; background: #f5f5f5; padding: 20px;">
