@@ -650,7 +650,7 @@ def render_sidebar():
                             with st.spinner("正在发送确认邮件..."):
                                 try:
                                     sender = EmailSender()
-                                    email_success, email_msg = sender.send_welcome_email(email_input)
+                                    email_success, email_msg = sender.send_welcome_email(email_input, push_time)
                                     if email_success:
                                         st.info("📧 确认邮件已发送，请查收！")
                                     else:
