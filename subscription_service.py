@@ -195,6 +195,36 @@ class EmailSender:
             
         except Exception as e:
             return False, f"邮件发送失败: {str(e)}"
+        
+    def send_welcome_email(self, to_email: str) -> tuple[bool, str]:
+        """
+        发送订阅确认邮件
+        
+        Args:
+            to_email: 收件人邮箱
+        """
+        try:
+            subject = "【DMR-ML Pro】订阅成功！感谢支持，欢迎加入🛫"
+            html_content = self._build_welcome_email_html()
+            
+            # 创建邮件
+            msg = MIMEMultipart('alternative')
+            msg['Subject'] = subject
+            msg['From'] = self.config['sender_email']
+            msg['To'] = to_email
+            
+            # 添加HTML内容
+            msg.attach(MIMEText(html_content, 'html', 'utf-8'))
+            
+            # 发送邮件
+            with smtplib.SMTP_SSL(self.config['smtp_server'], 465) as server:
+                server.login(self.config['sender_email'], self.config['sender_password'])
+                server.send_message(msg)
+            
+            return True, "欢迎邮件发送成功"
+            
+        except Exception as e:
+            return False, f"欢迎邮件发送失败: {str(e)}"
     
     def _build_email_html(self, signal_data: dict) -> str:
         """构建邮件HTML内容"""
@@ -354,7 +384,176 @@ class EmailSender:
         """
         
         return html
-    
+       
+    def _build_welcome_email_html(self) -> str:
+        """构建订阅确认邮件HTML"""
+        html = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <style>
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    background-color: #f5f5f5;
+                    padding: 20px;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    background: white;
+                    border-radius: 16px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                }
+                .header {
+                    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+                    color: white;
+                    padding: 40px 30px;
+                    text-align: center;
+                }
+                .header h1 {
+                    margin: 0;
+                    font-size: 32px;
+                }
+                .header p {
+                    margin: 10px 0 0;
+                    opacity: 0.9;
+                    font-size: 16px;
+                }
+                .welcome-box {
+                    padding: 40px 30px;
+                    text-align: center;
+                    background: #f8f9fa;
+                }
+                .welcome-box h2 {
+                    color: #2c3e50;
+                    margin: 0 0 20px;
+                    font-size: 24px;
+                }
+                .welcome-box p {
+                    color: #666;
+                    line-height: 1.8;
+                    margin: 10px 0;
+                }
+                .success-icon {
+                    font-size: 64px;
+                    margin-bottom: 20px;
+                }
+                .feature-section {
+                    padding: 30px;
+                }
+                .feature-item {
+                    padding: 15px 0;
+                    border-bottom: 1px solid #eee;
+                }
+                .feature-item:last-child {
+                    border-bottom: none;
+                }
+                .feature-title {
+                    font-weight: 600;
+                    color: #2c3e50;
+                    margin-bottom: 5px;
+                }
+                .feature-desc {
+                    color: #666;
+                    font-size: 14px;
+                }
+                .info-box {
+                    background: #fff3cd;
+                    border-left: 4px solid #ffc107;
+                    padding: 15px 20px;
+                    margin: 20px 30px;
+                    border-radius: 4px;
+                }
+                .info-box strong {
+                    color: #856404;
+                }
+                .cta-section {
+                    padding: 30px;
+                    text-align: center;
+                    background: #f8f9fa;
+                }
+                .cta-button {
+                    display: inline-block;
+                    padding: 12px 30px;
+                    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 25px;
+                    font-weight: 600;
+                    margin: 10px;
+                }
+                .footer {
+                    background: #2c3e50;
+                    color: #95a5a6;
+                    padding: 20px 30px;
+                    text-align: center;
+                    font-size: 12px;
+                }
+                .footer a {
+                    color: #FF6B6B;
+                    text-decoration: none;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>🎉 欢迎加入 DMR-ML Pro</h1>
+                    <p>基于机器学习的双重动量轮动策略</p>
+                </div>
+                
+                <div class="welcome-box">
+                    <div class="success-icon">✅</div>
+                    <h2>订阅成功！</h2>
+                    <p>恭喜您成为 DMR-ML Pro 的内测用户</p>
+                    <p>每个交易日早上 <strong>8:00</strong>，您将收到今日操作信号</p>
+                </div>
+                
+                <div class="feature-section">
+                    <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">📊 您将获得</h3>
+                    
+                    <div class="feature-item">
+                        <div class="feature-title">📡 每日操作信号</div>
+                        <div class="feature-desc">沪深300/中证1000/空仓，清晰明确的投资建议</div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-title">🛡️ ML风险预警</div>
+                        <div class="feature-desc">机器学习模型实时监控市场风险，提前规避下跌</div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-title">💡 信号解读</div>
+                        <div class="feature-desc">详细的信号原因说明，让您知其然更知其所以然</div>
+                    </div>
+                    
+                </div>
+                
+                <div class="info-box">
+                    <strong>⚠️ 重要提示</strong><br>
+                    本策略基于历史数据回测，过往业绩不代表未来表现。<br>
+                    投资有风险，决策需谨慎。所有信号仅供参考。
+                </div>
+                
+                <div class="cta-section">
+                    <p style="color: #666; margin-bottom: 20px;">访问系统了解更多详情</p>
+                    <a href="https://dmr-ml-pro-8odufgfuzjtivdppmnwrvh.streamlit.app/" class="cta-button">
+                        立即访问系统
+                    </a>
+                </div>
+                
+                <div class="footer">
+                    <p>如有任何问题，请回复本邮件或联系 ykai.w@outlook.com</p>
+                    <p>如需取消订阅，请回复邮件告知</p>
+                    <p style="margin-top: 15px;">DMR-ML Pro v1.0-内测版 | © 2026 ykai-w</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+        return html 
     def send_batch_emails(self, subscribers: List[Subscriber], signal_data: dict) -> dict:
         """
         批量发送邮件
