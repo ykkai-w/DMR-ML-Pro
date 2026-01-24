@@ -1,7 +1,6 @@
 """
 DMR Pro System - Streamlit 仪表盘
 =====================================
-专业级量化交易系统界面
 
 Author: DMR Pro Team
 """
@@ -819,23 +818,6 @@ def render_sidebar():
             <p><strong>DMR-ML Pro v1.0-内测版</strong></p>
             <p>© 2026 ykai-w</p>
         </div>
-        """, unsafe_allow_html=True)
-        
-        # 注入CSS让管理按钮更隐蔽（深灰色）
-        st.markdown("""
-        <style>
-        button[key="admin_entrance"] {
-            background-color: #2b2b2b !important;
-            border: 1px solid #3a3a3a !important;
-            color: #888888 !important;
-            font-size: 0.8rem !important;
-        }
-        button[key="admin_entrance"]:hover {
-            background-color: #353535 !important;
-            border: 1px solid #4a4a4a !important;
-            color: #aaaaaa !important;
-        }
-        </style>
         """, unsafe_allow_html=True)
         
         # 管理入口（未激活时显示）
