@@ -5,7 +5,13 @@ DMR Pro System - Streamlit 仪表盘
 
 Author: DMR Pro Team
 """
-
+# 加载环境变量（本地开发时使用）
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # 生产环境可能没有 python-dotenv
+    
 import streamlit as st
 import pandas as pd
 import numpy as np
