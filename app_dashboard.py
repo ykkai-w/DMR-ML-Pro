@@ -633,15 +633,30 @@ def render_sidebar():
                 key="push_time"
             )
             
-            # 订阅按钮
+                        # 订阅按钮
             if st.button("✅ 立即订阅", key="subscribe_btn", use_container_width=True):
                 if email_input:
                     try:
-                        from subscription_service import subscribe_email
+                        from subscription_service import subscribe_email, EmailSender
+                        
+                        # 添加订阅
                         success, msg = subscribe_email(email_input, push_time)
+                        
                         if success:
                             st.success(msg)
                             st.balloons()
+                            
+                            # 立即发送确认邮件
+                            with st.spinner("正在发送确认邮件..."):
+                                try:
+                                    sender = EmailSender()
+                                    email_success, email_msg = sender.send_welcome_email(email_input)
+                                    if email_success:
+                                        st.info("📧 确认邮件已发送，请查收！")
+                                    else:
+                                        st.warning(f"⚠️ 订阅成功但确认邮件发送失败，您仍将正常收到每日信号")
+                                except Exception as e:
+                                    st.warning(f"⚠️ 订阅成功但确认邮件发送失败: {str(e)}")
                         else:
                             st.warning(msg)
                     except Exception as e:
