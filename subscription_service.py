@@ -29,7 +29,7 @@ EMAIL_CONFIG = {
     'smtp_server': 'smtp.qq.com',  # QQ邮箱SMTP
     'smtp_port': 587,
     'sender_email': '2103318492@qq.com',  
-    'sender_password': 'avcminvzfhmtfafi',
+    'sender_password': os.environ.get('EMAIL_PASSWORD', ''),
 }
 
 
