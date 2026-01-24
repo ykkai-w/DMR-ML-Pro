@@ -824,7 +824,7 @@ def render_sidebar():
         if not st.session_state.admin_mode:
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
-                if st.button("🔑 管理", key="admin_entrance", use_container_width=True):
+                if st.button("🔑 管理", key="secondary, use_container_width=True):
                     st.session_state.admin_mode = True
                     st.rerun()
         
