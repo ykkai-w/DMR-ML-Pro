@@ -18,6 +18,13 @@ import os
 import sys
 from datetime import datetime
 
+# 加载环境变量（本地开发时使用）
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # 生产环境可能没有 python-dotenv
+
 # 添加项目路径
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
