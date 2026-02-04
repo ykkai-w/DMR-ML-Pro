@@ -239,7 +239,7 @@ pip install -r requirements.txt --upgrade
 ### 联系方式
 
 - ✉️ 个人邮箱：ykai.w@outlook.com
-- 💻 GitHub：github.com/ykai-w
+- 💻 GitHub：github.com/ykkai-w
 
 ### 反馈渠道
 
